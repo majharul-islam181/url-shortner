@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/http"
 	"time"
 )
 
@@ -61,4 +62,11 @@ func main() {
 	OriginalURL := "www.facebook.com"
 
 	generateShortURL(OriginalURL)
+
+	// Start the HTTP server on port 3000
+	fmt.Println("Starting server on port 3000")
+	error := http.ListenAndServe(":3000",nil)
+	if error!= nil{
+		fmt.Println("Error on starting server")
+	}
 }
