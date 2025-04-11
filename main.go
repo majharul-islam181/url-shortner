@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"time"
 )
@@ -12,6 +14,25 @@ type URL struct {
 	CreationDate time.Time `json:"creation_date"`
 }
 
+var urlDB = make(map[string]URL)
+
+func generateShortURL(OriginalURL string) string {
+
+	hasher := md5.New()
+	hasher.Write([]byte(OriginalURL))
+	fmt.Println("Hasher: ", hasher)
+	data := hasher.Sum(nil)
+	fmt.Println("Hasher data: ", data)
+	hash := hex.EncodeToString(data)
+	fmt.Println("Encoding to String : ", hash)
+	fmt.Println("hasing to 8 : ", hash[:8])
+	return hash[:8]
+
+}
+
 func main() {
 	fmt.Println("Creating Url-Shortner")
+	OriginalURL := "www.facebook.com"
+
+	generateShortURL(OriginalURL)
 }
