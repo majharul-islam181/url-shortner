@@ -45,6 +45,16 @@ func createURL(originalURL string) string {
 	return shortURL
 }
 
+func getURl(id string) (URL, error) {
+	url, ok := urlDB[id]
+	if !ok {
+		return URL{}, errors.New("URL not found")
+	}
+	return url, nil
+
+}
+
+
 
 func main() {
 	fmt.Println("Creating Url-Shortner")
